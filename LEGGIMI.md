@@ -1,8 +1,12 @@
-# Kubilai Tappeti — Landing Restauro & Lavaggio
+# Zareipour Kubilai Tappeti — Landing Restauro & Lavaggio
 
 Landing page moderna dedicata ai servizi di **lavaggio** e **restauro** tappeti, con
-form "Richiedi preventivo gratuito" (foto incluse) + telefono + WhatsApp. Logo ufficiale
-Zareipour Kubilai e foto reali dello showroom; coerente con i colori del sito kubilaitappeti.it.
+form "Richiedi preventivo gratuito" + telefono + WhatsApp. Logo ufficiale Zareipour
+Kubilai e foto reali dello showroom; coerente con i colori del sito kubilaitappeti.it.
+
+## 🌐 Online (GitHub Pages)
+**https://enzodovizio-digitalmarketing.github.io/kubilai-restauro-lavaggio/**
+Repo GitHub: `enzodovizio-digitalmarketing/kubilai-restauro-lavaggio` (branch `main`).
 
 ## 📁 Struttura
 ```
@@ -12,48 +16,51 @@ Kubilai-Landing/
 │   ├── css/style.css       ← stile (design system: rosso #970000, font Encode Sans + Playfair)
 │   ├── js/main.js          ← interazioni (menu, animazioni, galleria, form)
 │   └── img/                ← logo ufficiale + foto showroom + immagini servizi
-├── api/
-│   └── preventivo.php      ← invio email ALTERNATIVO via PHP (opzionale, vedi sotto)
+├── google-apps-script.gs   ← codice del "ponte" form → Foglio Google + email
 └── LEGGIMI.md
 ```
 
-## 📧 Email del form (IMPORTANTE)
-Il form invia ogni richiesta a **kubilai.tappeti@gmail.com** tramite **FormSubmit.co**
-(servizio gratuito, nessuna registrazione). Le foto del tappeto vengono allegate alla mail.
+## 📧 Form → Foglio Google + Email
+Ogni invio del form passa da un **Google Apps Script** (collegato al Foglio contatti) che:
+1. **aggiunge una riga** nel Foglio Google (colonne N · Nome · Telefono · Email · Messaggio · data · Contattato · Ha risposto · A cosa è interessato),
+2. **invia un'email** di notifica.
 
-⚠️ **Attivazione (una sola volta):** alla **prima** richiesta inviata, FormSubmit manda
-un'email di conferma a kubilai.tappeti@gmail.com con un pulsante **"Activate Form"**.
-Va cliccato una volta: da quel momento **tutte** le richieste arrivano in casella.
-(Finché non si attiva, le richieste non vengono inoltrate.)
+- Foglio: `1uWSYQ1_z0yJB3wg4qIsH1zmBohVFt4DcvvCWszJCaFg`
+- Codice dello script: `google-apps-script.gs` (incollato in *Foglio → Estensioni → Apps Script*, pubblicato come **App web → Chiunque**).
+- L'URL dell'app web (`/exec`) è impostato come `action` del form in `index.html`.
+
+### Per cambiare il destinatario dell'email / il foglio
+Apri lo script (Foglio → Estensioni → Apps Script), modifica le due righe in alto:
+```javascript
+var SHEET_ID     = '...';                       // ID del foglio
+var NOTIFY_EMAIL = 'enzo.dovizio@gmail.com';    // ⚠️ in produzione: kubilai.tappeti@gmail.com
+```
+poi **Esegui il deployment → Gestisci deployment → (matita) → Esegui di nuovo** (l'URL resta lo stesso).
+
+> Stato attuale: NOTIFY_EMAIL è impostato sulla mail di Enzo per i **test**.
+> Per la consegna al cliente, cambiarlo in `kubilai.tappeti@gmail.com`.
 
 ## 👀 Vedere la landing in locale
-Apri direttamente `index.html` con doppio clic, oppure avvia un server:
+Apri `index.html` con doppio clic, oppure:
 ```
 cd "Kubilai-Landing"
-python3 -m http.server 8080
+python3 -m http.server 8080   # poi http://localhost:8080
 ```
-poi vai su http://localhost:8080
 
-> Nota: l'invio del form funziona anche in locale se c'è connessione internet
-> (passa da FormSubmit). Per provarlo senza spedire davvero, apri
-> `http://localhost:8080/?sent=1` per vedere la schermata di conferma.
+## 🔄 Aggiornare il sito online
+```
+cd "Kubilai-Landing"
+git add -A && git commit -m "aggiornamento" && git push
+```
+GitHub Pages ripubblica in 1–2 minuti.
 
-## 🚀 Mettere online su Aruba (quando vuoi)
-1. Carica la cartella in una sottocartella dell'hosting, es. `/restauro-lavaggio/`
-   (via **Pannello Aruba → Gestione File**, oppure via **FTP**).
-2. La landing sarà su `https://www.kubilaitappeti.it/restauro-lavaggio/`
-3. Il form funziona già così (FormSubmit). **In alternativa**, per non usare servizi
-   esterni, puoi far inviare l'email dal tuo hosting: cambia `action` del form in
-   `api/preventivo.php` (Aruba supporta PHP e `mail()`; il destinatario è già impostato).
-4. (Opzionale) aggiungi il link alla landing nel menu del sito principale.
-
-## ✏️ Come modificare i contenuti
-- **Testi:** sono tutti dentro `index.html`, in chiaro (italiano).
+## ✏️ Modificare i contenuti
+- **Testi:** dentro `index.html`, in chiaro (italiano).
 - **Colori/font:** in cima a `assets/css/style.css`, sezione `:root` (variabili `--red`, ecc.).
 - **Immagini:** sostituisci i file in `assets/img/` mantenendo lo stesso nome.
-- **Telefono/email/indirizzo:** cerca `0432471047` / `kubilai.tappeti@gmail.com` in `index.html`.
+- **Telefono/indirizzo:** cerca `0432471047` / `Tricesimo` in `index.html`.
 
 ## 🔧 Note
-- Nessun framework, nessuna build: sono file statici, si caricano e basta.
-- Le recensioni clienti non sono incluse (per non inventarle): possiamo aggiungere
-  le recensioni Google reali quando vuoi.
+- Nessun framework, nessuna build: file statici.
+- Le recensioni clienti non sono incluse (per non inventarle): si possono aggiungere le recensioni Google reali.
+- (Alternativa futura) la pagina può essere spostata su Aruba in `/restauro-lavaggio/`.
