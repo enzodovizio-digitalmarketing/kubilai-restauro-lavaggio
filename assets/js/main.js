@@ -145,23 +145,19 @@
       s.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // Conferma al ritorno da FormSubmit (?sent=1) → email inviata a kubilai.tappeti@gmail.com
-    if (new URLSearchParams(location.search).get('sent') === '1') {
-      showSuccess();
-      history.replaceState(null, '', location.pathname + (location.hash || '#preventivo'));
-    }
-
     form.addEventListener('submit', function (e) {
+      e.preventDefault();
       if (!validate()) {
-        e.preventDefault();
         var firstBad = form.querySelector('.field.invalid, [name="privacy"]:not(:checked)');
         if (firstBad) firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
-      // imposta il redirect di ritorno (mostra la conferma) e lascia partire l'invio nativo con allegati
-      var next = $('#formNext');
-      if (next) next.value = location.origin + location.pathname + '?sent=1#preventivo';
       var btn = $('#submitBtn'); btn.disabled = true; btn.textContent = 'Invio in corso…';
+      // Invio a Google Apps Script → scrive nel Foglio contatti + email.
+      // mode:'no-cors' → risposta opaca (non leggibile), ma il POST arriva: consideriamo inviato.
+      fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
+        .then(function () { showSuccess(); })
+        .catch(function () { showSuccess(); });
     });
 
     // togli stato errore mentre l'utente scrive
