@@ -3,3 +3,4 @@ node_modules/
 *.log
 _*.mjs
 _*.py
+.continue-here.md
