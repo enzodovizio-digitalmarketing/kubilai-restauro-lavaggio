@@ -121,41 +121,6 @@
     });
   }
 
-  /* ---------- File upload (chips + drag&drop, max 5) ---------- */
-  var input = $('#foto'), drop = $('#filedrop'), list = $('#fileList');
-  var MAX = 5;
-  var dt = new DataTransfer();
-  function renderFiles() {
-    list.innerHTML = '';
-    Array.prototype.forEach.call(dt.files, function (f, i) {
-      var chip = document.createElement('span');
-      chip.className = 'file-chip';
-      chip.innerHTML = '<span>' + f.name.replace(/(.{18}).+(\..+)$/, '$1…$2') + '</span>';
-      var x = document.createElement('button');
-      x.type = 'button'; x.textContent = '×'; x.setAttribute('aria-label', 'Rimuovi');
-      x.addEventListener('click', function () { dt.items.remove(i); input.files = dt.files; renderFiles(); });
-      chip.appendChild(x); list.appendChild(chip);
-    });
-  }
-  function addFiles(files) {
-    Array.prototype.forEach.call(files, function (f) {
-      if (dt.files.length >= MAX) return;
-      if (!/^image\//.test(f.type)) return;
-      dt.items.add(f);
-    });
-    input.files = dt.files; renderFiles();
-  }
-  if (input) {
-    input.addEventListener('change', function () { var f = input.files; dt = new DataTransfer(); addFiles(f); });
-    ['dragenter', 'dragover'].forEach(function (ev) {
-      drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('drag'); });
-    });
-    ['dragleave', 'drop'].forEach(function (ev) {
-      drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('drag'); });
-    });
-    drop.addEventListener('drop', function (e) { if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files); });
-  }
-
   /* ---------- Form validation + submit ---------- */
   var form = $('#preventivoForm');
   if (form) {
