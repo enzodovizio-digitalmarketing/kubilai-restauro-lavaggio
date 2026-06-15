@@ -25,6 +25,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   --cream:#fbf7f0;      --cream-2:#f3ebdd;
   --sand:#ece1cf;       --paper:#ffffff;
   --gold:#b0863f;       --gold-soft:#c8a36a;
+  --btn:#b0863f;        --btn-d:#9a6f2e;
   --line:rgba(28,21,18,.12);
   --line-soft:rgba(28,21,18,.07);
   --shadow-sm:0 2px 10px rgba(40,20,10,.07);
@@ -79,8 +80,8 @@ em,.italic{font-style:italic}
   transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s,color .3s;
   white-space:nowrap;line-height:1}
 .btn svg{width:18px;height:18px}
-.btn--primary{background:var(--red);color:#fff;box-shadow:0 14px 30px -12px rgba(151,0,0,.7)}
-.btn--primary:hover{background:var(--red-d);transform:translateY(-3px);box-shadow:0 20px 38px -12px rgba(151,0,0,.8)}
+.btn--primary{background:var(--btn);color:var(--ink);box-shadow:0 14px 30px -12px rgba(176,134,63,.75)}
+.btn--primary:hover{background:var(--btn-d);color:var(--ink);transform:translateY(-3px);box-shadow:0 20px 38px -12px rgba(176,134,63,.85)}
 .btn--ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
 .btn--ghost:hover{border-color:var(--ink);transform:translateY(-3px)}
 .btn--light{background:#fff;color:var(--ink)}
@@ -88,7 +89,7 @@ em,.italic{font-style:italic}
 .btn--gold{background:var(--gold);color:#fff}
 .btn--gold:hover{background:#9a7232;transform:translateY(-3px)}
 .btn--lg{padding:19px 38px;font-size:1rem}
-.btn--block{width:100%}
+.btn--block{width:100%;white-space:normal}
 
 /* ============================ HEADER / NAV ============================ */
 .kilim-strip{height:6px;width:100%;
@@ -167,6 +168,7 @@ body.menu-open .nav-toggle span::after{top:0;transform:rotate(-45deg);background
 .hero__bg::after{background:linear-gradient(100deg,rgba(18,9,6,.93) 0%,rgba(24,12,8,.84) 40%,rgba(34,15,10,.62) 70%,rgba(46,18,12,.55) 100%)}
 .hero__scroll{display:none}
 .hero__grid{position:relative;display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(30px,4vw,60px);align-items:center;width:100%}
+.hero__grid > *{min-width:0}
 .hero__content{max-width:640px}
 .hero__eyebrow{color:var(--gold-soft)}
 .hero__eyebrow::before{background:var(--gold-soft)}
@@ -382,9 +384,9 @@ body.menu-open .nav-toggle span::after{top:0;transform:rotate(-45deg);background
 
 /* ============================ FLOATING CALL (mobile) ============================ */
 .fab-call{position:fixed;right:18px;bottom:18px;z-index:80;display:none;
-  align-items:center;gap:10px;background:var(--red);color:#fff;padding:14px 20px;border-radius:999px;
-  font-family:var(--font-sans);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:.86rem;
-  box-shadow:0 16px 34px -12px rgba(151,0,0,.8);animation:fabIn .5s var(--ease) .6s both}
+  align-items:center;gap:10px;background:var(--btn);color:var(--ink);padding:14px 20px;border-radius:999px;
+  font-family:var(--font-sans);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.86rem;
+  box-shadow:0 16px 34px -12px rgba(176,134,63,.85);animation:fabIn .5s var(--ease) .6s both}
 .fab-call svg{width:20px;height:20px}
 @keyframes fabIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
@@ -420,6 +422,8 @@ body.menu-open .mobile-menu{transform:none;visibility:visible}
   .hero__grid{grid-template-columns:1fr;gap:30px}
   .hero__content{max-width:none}
   .hero__card{max-width:520px}
+  .hero__actions{flex-direction:column;align-items:stretch}
+  .hero__actions .btn{width:100%;white-space:normal}
   .stats .container{grid-template-columns:1fr 1fr;gap:36px 16px}
   .stat:nth-child(2)::after{display:none}
   .svc{grid-template-columns:1fr;gap:26px}
