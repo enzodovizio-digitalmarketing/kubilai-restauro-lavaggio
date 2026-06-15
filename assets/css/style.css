@@ -420,10 +420,13 @@ body.menu-open .mobile-menu{transform:none;visibility:visible}
   .nav-toggle{display:flex}
   .hero{padding-bottom:90px}
   .hero__grid{grid-template-columns:1fr;gap:30px}
-  .hero__content{max-width:none}
-  .hero__card{max-width:520px}
+  .hero__content{max-width:none;text-align:center}
+  .hero__chips{justify-content:center}
+  .hero__card{max-width:520px;margin-inline:auto}
   .hero__actions{flex-direction:column;align-items:stretch}
   .hero__actions .btn{width:100%;white-space:normal}
+  /* titoli sezione centrati su mobile (equilibrio visivo) */
+  .section-head{text-align:center;margin-left:auto;margin-right:auto}
   .stats .container{grid-template-columns:1fr 1fr;gap:36px 16px}
   .stat:nth-child(2)::after{display:none}
   .svc{grid-template-columns:1fr;gap:26px}
