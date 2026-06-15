@@ -9,7 +9,7 @@
 
 // === CONFIG =============================================================
 var SHEET_ID     = '1uWSYQ1_z0yJB3wg4qIsH1zmBohVFt4DcvvCWszJCaFg';
-var NOTIFY_EMAIL = 'enzo.dovizio@gmail.com'; // TEST — poi metti kubilai.tappeti@gmail.com
+var NOTIFY_EMAIL = 'kubilai.tappeti@gmail.com'; // destinatario delle richieste
 // ========================================================================
 
 function doPost(e) {

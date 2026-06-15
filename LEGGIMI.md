@@ -33,12 +33,11 @@ Ogni invio del form passa da un **Google Apps Script** (collegato al Foglio cont
 Apri lo script (Foglio → Estensioni → Apps Script), modifica le due righe in alto:
 ```javascript
 var SHEET_ID     = '...';                       // ID del foglio
-var NOTIFY_EMAIL = 'enzo.dovizio@gmail.com';    // ⚠️ in produzione: kubilai.tappeti@gmail.com
+var NOTIFY_EMAIL = 'kubilai.tappeti@gmail.com'; // destinatario delle richieste
 ```
 poi **Esegui il deployment → Gestisci deployment → (matita) → Esegui di nuovo** (l'URL resta lo stesso).
 
-> Stato attuale: NOTIFY_EMAIL è impostato sulla mail di Enzo per i **test**.
-> Per la consegna al cliente, cambiarlo in `kubilai.tappeti@gmail.com`.
+> Destinatario richieste: **kubilai.tappeti@gmail.com**.
 
 ## 👀 Vedere la landing in locale
 Apri `index.html` con doppio clic, oppure:
