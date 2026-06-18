@@ -4,3 +4,4 @@ node_modules/
 _*.mjs
 _*.py
 .continue-here.md
+.wrangler/
