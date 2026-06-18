@@ -3,13 +3,21 @@
    Da incollare in: Foglio Google → Estensioni → Apps Script
    Poi: Esegui il deployment → App web → "Chiunque" → copia l'URL /exec
    =========================================================================
+   ⚠️ IMPORTANTE — IL MITTENTE = IL PROPRIETARIO DELLO SCRIPT
+   MailApp.sendEmail() spedisce SEMPRE dall'account Google che possiede
+   questo script (non dall'indirizzo nel codice). Perché la mail PARTA da
+   kubilai, questo script + il Foglio devono stare nell'account
+   kubilai.tappeti@gmail.com (creato/autorizzato con quel login).
+   Se lo crei con un altro account, la mail partirà da quell'account.
+   =========================================================================
    Il foglio collegato ha queste colonne (riga 1 = intestazioni):
    N | Nome | Telefono | Email | Messaggio | data | Contattato | Ha risposto | A cosa è interessato
 */
 
 // === CONFIG =============================================================
 var SHEET_ID     = '1uWSYQ1_z0yJB3wg4qIsH1zmBohVFt4DcvvCWszJCaFg';
-var NOTIFY_EMAIL = 'kubilai.tappeti@gmail.com'; // destinatario delle richieste
+var NOTIFY_EMAIL = 'kubilai.tappeti@gmail.com';          // destinatario (TO) — il cliente
+var CC_EMAIL     = 'enzo.dovizio@safemarketing.it';      // copia per monitoraggio (CC) — '' per disattivarla
 // ========================================================================
 
 function doPost(e) {
@@ -43,7 +51,7 @@ function doPost(e) {
 
     // email di notifica
     var body =
-      'Nuova richiesta di preventivo dal sito\n' +
+      'Nuovo contatto dalla Landing Lavaggio/Restauro\n' +
       '----------------------------------------\n\n' +
       'Nome:      ' + (p.nome || '-') + '\n' +
       'Telefono:  ' + (p.telefono || '-') + '\n' +
@@ -53,12 +61,15 @@ function doPost(e) {
       '----------------------------------------\n' +
       'Ricevuto il ' + dataStr + ' · salvato nel foglio contatti.';
 
-    MailApp.sendEmail({
+    var opts = {
       to: NOTIFY_EMAIL,
-      subject: 'Nuova richiesta di preventivo dal sito',
+      subject: 'Nuovo Contatto Landing Lavaggio/Restauro',
       body: body,
+      name: 'Sito Kubilai Tappeti', // nome mostrato come mittente
       replyTo: (p.email && p.email.indexOf('@') > -1) ? p.email : NOTIFY_EMAIL
-    });
+    };
+    if (CC_EMAIL) opts.cc = CC_EMAIL; // copia per monitoraggio
+    MailApp.sendEmail(opts);
 
     return _json({ ok: true });
   } catch (err) {
