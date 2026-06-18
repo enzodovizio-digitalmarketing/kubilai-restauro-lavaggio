@@ -104,9 +104,9 @@ em,.italic{font-style:italic}
 .brand-badge{display:flex;align-items:center;justify-content:center;background:#fff;
   border-radius:14px;padding:8px 13px;box-shadow:0 8px 22px -8px rgba(0,0,0,.4);
   transition:padding .4s var(--ease),box-shadow .4s var(--ease)}
-.brand-badge img{height:70px;width:auto;display:block;transition:height .4s var(--ease)}
+.brand-badge img{height:78px;width:auto;display:block;transition:height .4s var(--ease)}
 .scrolled .brand-badge{padding:6px 11px;box-shadow:var(--shadow-sm)}
-.scrolled .brand-badge img{height:56px}
+.scrolled .brand-badge img{height:62px}
 .nav-links{display:flex;align-items:center;gap:30px}
 .nav-links a{font-family:var(--font-sans);text-transform:uppercase;letter-spacing:.1em;
   font-size:.88rem;font-weight:600;color:var(--ink);position:relative;padding:6px 0;
@@ -269,7 +269,7 @@ body.menu-open .nav-toggle span::after{top:0;transform:rotate(-45deg);background
   letter-spacing:.2em;font-size:.82rem;color:var(--gold-soft)}
 
 /* ============================ GALLERY ============================ */
-.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px;grid-auto-flow:dense}
 .gallery__item{position:relative;overflow:hidden;border-radius:12px;cursor:pointer;background:#000}
 .gallery__item img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),opacity .4s}
 .gallery__item::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,8,5,.55),transparent 55%);opacity:0;transition:opacity .4s}
@@ -307,14 +307,14 @@ body.menu-open .nav-toggle span::after{top:0;transform:rotate(-45deg);background
 .contact{background:var(--ink);color:#f0e6da}
 .contact__grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,64px);align-items:start}
 .contact__info h2{color:#fff}
-.contact__info .lead{color:#cdbfb1}
-.info-list{margin-top:34px;display:grid;gap:22px}
+.contact__info .lead{color:#cdbfb1;margin-top:20px}
+.info-list{margin-top:34px;display:grid;gap:24px}
 .info-list li{display:flex;gap:16px;align-items:flex-start}
 .info-list .ic{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.06);
   display:flex;align-items:center;justify-content:center;color:var(--gold-soft);flex:none}
 .info-list .ic svg{width:22px;height:22px}
-.info-list .lbl{font-size:.76rem;text-transform:uppercase;letter-spacing:.18em;color:#a9988a}
-.info-list .val{font-size:1.08rem;color:#fff;font-weight:600;margin-top:2px}
+.info-list .lbl{font-size:.76rem;text-transform:uppercase;letter-spacing:.18em;color:#a9988a;display:block;margin-bottom:5px}
+.info-list .val{font-size:1.08rem;color:#fff;font-weight:600}
 .info-list .val a:hover{color:var(--gold-soft)}
 .contact__map{margin-top:30px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
 .contact__map iframe{display:block;width:100%;height:220px;filter:grayscale(.3) contrast(1.05)}
